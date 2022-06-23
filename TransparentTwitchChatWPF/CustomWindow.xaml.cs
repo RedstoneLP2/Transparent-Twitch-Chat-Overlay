@@ -46,6 +46,15 @@ namespace TransparentTwitchChatWPF
             Services.Tracker.Configure(this).IdentifyAs(rgx.Replace(this.customURL, "")).Apply();
         }
 
+        private string InsertCustomCSS2(string CSS)
+        {
+            string uriEncodedCSS = Uri.EscapeDataString(CSS);
+            string script = "const ttcCSS = document.createElement('style');";
+            script += "ttcCSS.innerHTML = decodeURIComponent(\"" + uriEncodedCSS + "\");";
+            script += "document.querySelector('head').appendChild(ttcCSS);";
+            return script;
+        }
+
         private void Browser2_LoadingStateChanged(object sender, CefSharp.LoadingStateChangedEventArgs e)
         {
             if (!e.IsLoading)
@@ -277,6 +286,31 @@ namespace TransparentTwitchChatWPF
             if (this.Browser2.IsBrowserInitialized)
             {
                 SetupBrowser();
+            }
+        }
+        private void Browser2_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
+        {
+            if (e.Frame.IsMain)
+            {
+                this.Browser2.Dispatcher.Invoke(new Action(() => { this.Browser2.ZoomLevel = SettingsSingleton.Instance.genSettings.ZoomLevel; }));
+
+                // Custom CSS
+                string script = string.Empty;
+                string css = string.Empty;
+
+                Console.WriteLine(e.Frame.Url);
+
+                String CssOrEmpty = SettingsSingleton.Instance.genSettings.CustomWindowCSS[SettingsSingleton.Instance.genSettings.CustomWindows.IndexOf(e.Frame.Url)];
+                if (!string.IsNullOrEmpty(CssOrEmpty))
+                    css = CssOrEmpty;
+
+                if (!string.IsNullOrEmpty(css))
+                    script = InsertCustomCSS2(css);
+
+                if (!string.IsNullOrEmpty(script))
+                    e.Frame.ExecuteJavaScriptAsync(script, "", 0);
+
+
             }
         }
     }

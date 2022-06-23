@@ -310,7 +310,7 @@ namespace TransparentTwitchChatWPF
 
         private void NewWidgetButton_Click(object sender, RoutedEventArgs e)
         {
-            this._main.CreateNewWindow(this.tbUrlForWidget.Text);
+            this._main.CreateNewWindow(this.tbUrlForWidget.Text, this.widgetCSS.Text);
             this.tbUrlForWidget.Text = string.Empty;
         }
 

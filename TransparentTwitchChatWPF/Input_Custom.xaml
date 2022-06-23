@@ -17,16 +17,26 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- <Image Source="/WpfTutorialSamples;component/Images/question32.png" Width="32" Height="32" Grid.RowSpan="2" Margin="20,0" /> -->
 
         <Label Name="lblQuestion" Grid.Column="1">Custom URL:</Label>
         <TextBox Name="txtAnswer" Grid.Column="1" Grid.Row="1" MinWidth="250"></TextBox>
+         <Label Content="Custom CSS" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" />
+            <TextBox Name="customCSS" Grid.Row="3" Grid.Column="1"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                         Width="Auto" Height="100"
+                         HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" 
+                         Margin="22,10,15,0" TextWrapping="Wrap" AcceptsReturn="true"
+                         Text="" />
 
-        <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,0,0">
+        <WrapPanel Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,0,0">
             <Button IsDefault="True" Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60" Margin="0,0,10,0">_Ok</Button>
             <Button IsCancel="True" MinWidth="60">_Cancel</Button>
         </WrapPanel>
+        
     </Grid>
 </Window>

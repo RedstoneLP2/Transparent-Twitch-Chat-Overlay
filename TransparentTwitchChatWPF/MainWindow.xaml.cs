@@ -602,7 +602,7 @@ namespace TransparentTwitchChatWPF
             ");
         }
 
-        public void CreateNewWindow(string URL)
+        public void CreateNewWindow(string URL, string css)
         {
             if (SettingsSingleton.Instance.genSettings.CustomWindows.Contains(URL))
             {
@@ -611,6 +611,7 @@ namespace TransparentTwitchChatWPF
             else
             {
                 SettingsSingleton.Instance.genSettings.CustomWindows.Add(URL);
+                SettingsSingleton.Instance.genSettings.CustomWindowCSS.Add(css);
                 OpenNewCustomWindow(URL);
             }
         }
@@ -620,7 +621,7 @@ namespace TransparentTwitchChatWPF
             Input_Custom inputDialog = new Input_Custom();
             if (inputDialog.ShowDialog() == true)
             {
-                CreateNewWindow(inputDialog.Url);
+                CreateNewWindow(inputDialog.Url, inputDialog.customCSS.Text);
             }
         }
 
@@ -786,7 +787,9 @@ namespace TransparentTwitchChatWPF
         {
             if (SettingsSingleton.Instance.genSettings.CustomWindows.Contains(url))
             {
+                int CustomWindowIndex = SettingsSingleton.Instance.genSettings.CustomWindows.IndexOf(url);
                 SettingsSingleton.Instance.genSettings.CustomWindows.Remove(url);
+                SettingsSingleton.Instance.genSettings.CustomWindowCSS.RemoveAt(CustomWindowIndex);
             }
         }
 
@@ -1099,6 +1102,8 @@ namespace TransparentTwitchChatWPF
 
     public class GeneralSettings
     {
+        [Trackable]
+        public StringCollection CustomWindowCSS { get; set; }
         [Trackable]
         public StringCollection CustomWindows { get; set; }
         [Trackable]

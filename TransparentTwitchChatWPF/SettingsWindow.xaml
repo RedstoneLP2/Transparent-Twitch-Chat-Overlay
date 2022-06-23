@@ -254,6 +254,13 @@
                     <TextBlock Text="https://github.com/baffler/Transparent-Twitch-Chat-Overlay/wiki" />
                 </Hyperlink>
             </Label>
+            <Label Content="Custom CSS" HorizontalAlignment="Left" Margin="12,140,0,0" FontWeight="Bold" />
+            <TextBox Name="widgetCSS" 
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                         Width="Auto" Height="Auto"
+                         HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" 
+                         Margin="22,170,15,50" TextWrapping="Wrap" AcceptsReturn="true"
+                         Text="" />
         </Grid>
 
         <Grid Name="aboutGrid" Visibility="Hidden" Grid.Column="1">

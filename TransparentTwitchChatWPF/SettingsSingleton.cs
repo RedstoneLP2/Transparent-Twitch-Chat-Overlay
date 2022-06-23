@@ -20,6 +20,7 @@ namespace TransparentTwitchChatWPF
             this.genSettings = new GeneralSettings
             {
                 CustomWindows = new StringCollection(),
+                CustomWindowCSS = new StringCollection(),
                 Username = string.Empty,
                 FadeChat = false,
                 FadeTime = "120",
